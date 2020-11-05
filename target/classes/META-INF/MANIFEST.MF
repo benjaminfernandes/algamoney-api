@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 14
+Build-Jdk-Spec: 11
 Implementation-Title: algamoney-api
 Implementation-Version: 1.0.0-SNAPSHOT
 Created-By: Maven Integration for Eclipse
