@@ -52,7 +52,6 @@ public class PessoaResource {
 	}
 	
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
 		Pessoa pessoaSalva = this.pessoaRepository.save(pessoa);
 		this.publisher.publishEvent(new RecursoCriadoEvent(this, pessoaSalva.getCodigo(), response));
