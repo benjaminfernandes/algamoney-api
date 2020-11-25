@@ -23,7 +23,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.algamoney.api.exception.EntidadeNaoEncontradaException;
-import com.algamoney.api.exception.PessoaInexistenteOuInativaException;
 
 import lombok.Getter;
 import lombok.Setter;
