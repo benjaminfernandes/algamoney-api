@@ -26,6 +26,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
+	//@CrossOrigin(maxAge = 10, origins = ) Aula 6.9 FSA
 	@GetMapping
 	public List<Categoria> listarTodos(){
 		return this.categoriaRepository.findAll();
