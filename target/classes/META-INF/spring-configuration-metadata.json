@@ -9,24 +9,21 @@
       "name": "algamoney.seguranca",
       "type": "com.algamoney.api.config.property.AlgamoneyApiProperty$Seguranca",
       "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty",
-      "sourceMethod": "public com.algamoney.api.config.property.AlgamoneyApiProperty.Seguranca getSeguranca() "
+      "sourceMethod": "getSeguranca()"
     }
   ],
   "properties": [
     {
       "name": "algamoney.origin-permitida",
       "type": "java.lang.String",
-      "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty"
+      "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty",
+      "defaultValue": "http:\/\/localhost:8000"
     },
     {
       "name": "algamoney.seguranca.enable-https",
       "type": "java.lang.Boolean",
-      "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty$Seguranca"
-    },
-    {
-      "name": "algamoney.seguranca.enable-https",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty$Seguranca"
+      "sourceType": "com.algamoney.api.config.property.AlgamoneyApiProperty$Seguranca",
+      "defaultValue": false
     }
   ],
   "hints": []
