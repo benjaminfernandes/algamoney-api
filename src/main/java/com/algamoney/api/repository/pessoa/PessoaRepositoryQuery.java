@@ -8,5 +8,5 @@ import com.algamoney.api.repository.filter.PessoaFilter;
 
 public interface PessoaRepositoryQuery {
 
-	public Page<Pessoa> filtrer(PessoaFilter pessoaFilter, Pageable pageable);
+	public Page<Pessoa> filtrar(PessoaFilter pessoaFilter, Pageable pageable);
 }
