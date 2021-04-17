@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,10 +33,8 @@ public class Lancamento {
 	@NotNull
 	private String descricao;
 	@Column(name = "data_vencimento")
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataVencimento;
 	@Column(name="data_pagamento")
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataPagamento;
 	@NotNull
 	private BigDecimal valor;
