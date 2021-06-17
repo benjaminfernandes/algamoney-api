@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,11 @@ public class LancamentoService {
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
+	
+	@Scheduled(cron = "0 0 6 * * *") //é executado todos os dias as 6 da manhã
+	public void avisarSobreLancamentosVencidos() {
+		System.out.println("Método sendo executado");
+	}
 	
 	public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws JRException {
 		List<LancamentoEstatisticaPessoa> dados = lancamentoRepository.porPessoa(inicio, fim);
