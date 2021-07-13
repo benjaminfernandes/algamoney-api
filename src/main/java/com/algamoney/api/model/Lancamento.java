@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.algamoney.api.repository.listener.LancamentoAnexoListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,6 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@EntityListeners(LancamentoAnexoListener.class)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
@@ -54,6 +58,11 @@ public class Lancamento {
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
+	
+	private String anexo;
+	
+	@Transient
+	private String urlAnexo;
 	
 	@JsonIgnore
 	public boolean isReceita() {

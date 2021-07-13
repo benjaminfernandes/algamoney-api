@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.algamoney.api.dto.LancamentoEstatisticaPessoa;
 import com.algamoney.api.exception.LancamentoNaoEncontradoException;
@@ -27,6 +28,7 @@ import com.algamoney.api.model.Usuario;
 import com.algamoney.api.repository.LancamentoRepository;
 import com.algamoney.api.repository.PessoaRepository;
 import com.algamoney.api.repository.UsuarioRepository;
+import com.algamoney.api.storage.S3;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -48,6 +50,8 @@ public class LancamentoService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private Mailer mailer;
+	@Autowired
+	private S3 s3;
 	
 	@Scheduled(cron = "0 0 6 * * *") //é executado todos os dias as 6 da manhã
 	public void avisarSobreLancamentosVencidos() {
@@ -104,6 +108,10 @@ public class LancamentoService {
 			throw new PessoaInexistenteOuInativaException();
 		}
 		
+		if(StringUtils.hasText(lancamento.getAnexo())) {
+			s3.salvar(lancamento.getAnexo());
+		}
+		
 		return this.lancamentoRepository.save(lancamento);
 	}
 	
@@ -120,6 +128,16 @@ public class LancamentoService {
 			validarPessoa(lancamento);
 		}
 
+		if(StringUtils.isEmpty(lancamento.getAnexo()) && 
+				StringUtils.hasText(lancamentoSalvo.getAnexo())) {
+			s3.remover(lancamentoSalvo.getAnexo());
+		}else if(StringUtils.hasText(lancamento.getAnexo()) && 
+				!lancamento.getAnexo().equals(lancamentoSalvo.getAnexo())) {
+			
+			s3.substituir(lancamentoSalvo.getAnexo(), lancamento.getAnexo());
+			
+		}
+		
 		BeanUtils.copyProperties(lancamento, lancamentoSalvo, "codigo");
 
 		return lancamentoRepository.save(lancamentoSalvo);
