@@ -10,7 +10,7 @@ import lombok.Setter;
 @ConfigurationProperties("algamoney")
 public class AlgamoneyApiProperty {
 	
-	private String originPermitida = "http://localhost:4200";
+	private String originPermitida = "*";
 	private final Seguranca seguranca = new Seguranca();
 	private final Mail mail = new Mail();
 	private final S3 s3 = new S3();
